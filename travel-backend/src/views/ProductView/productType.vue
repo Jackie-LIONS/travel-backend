@@ -1,5 +1,5 @@
 <template>
-    <div><span class="title">用户管理</span><span class="title-info">用户列表</span></div>
+    <div><span class="title">产品类型管理</span><span class="title-info">全部产品类型</span></div>
     <a-button status="success">
         <template #icon>
             <icon-bookmark />
@@ -8,10 +8,8 @@
     </a-button>
     <a-table :columns="columns" :data="data">
         <template #optional="{ record }">
-            <a-button size="small" type="primary" status="success">详情</a-button>
             <a-button size="small" type="primary" @click="$modal.info({ title:'Name', content:record.name })">修改</a-button>
-            <a-button size="small" type="primary" status="danger">启用/禁用</a-button>
-            <a-button size="small" type="primary" status="warning">分配权限</a-button>
+            <a-button size="small" type="primary" status="danger">删除</a-button>
         </template>
     </a-table>
 </template>
@@ -29,23 +27,8 @@ const columns = reactive([
         align: 'center'
     },
     {
-        title: '用户名',
+        title: '产品类型',
         dataIndex: 'roleName',
-        align: 'center'
-    },
-    {
-        title: '邮箱',
-        dataIndex: 'roleInfo',
-        align: 'center'
-    },
-    {
-        title: '联系电话',
-        dataIndex: 'roleInfo',
-        align: 'center'
-    },
-    {
-        title: '状态',
-        dataIndex: 'roleInfo',
         align: 'center'
     },
     {
@@ -56,12 +39,26 @@ const columns = reactive([
 ]);
 const data = reactive([{
     key: '1',
-    roleName: 'lion',
-    roleInfo: '管理所有数据',
+    roleName: '全球自由行',
 }, {
     key: '2',
-    roleName: 'sky',
-    roleInfo: '管理商品',
+    roleName: '出境游',
+},
+{
+    key: '3',
+    roleName: '国内游',
+},
+{
+    key: '4',
+    roleName: '抱团定制',
+},
+{
+    key: '5',
+    roleName: '机票',
+},
+{
+    key: '6',
+    roleName: '门票',
 }]);
 
 </script>
@@ -71,7 +68,6 @@ const data = reactive([{
     margin: 15px 0 -15px 0;
     color: white;
 }
-
 .arco-table {
     --color-fill-1: rgb(28, 34, 56);
     --color-neutral-2: rgb(36, 41, 62);

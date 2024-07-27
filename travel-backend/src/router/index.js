@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView/home.vue'
-import Layout from '../views/Layout.vue'
+import Layout from '../components/Layout.vue'
 import LoginInfo from '../views/SystemView/AdminManager/login.vue'
 
 const router = createRouter({
@@ -36,7 +36,11 @@ const router = createRouter({
           name: 'Product',
           component: () =>import("../views/ProductView/product.vue")
         },
-
+        {
+            path: "/productType",
+            name: 'ProductType',
+            component: () =>import("../views/ProductView/productType.vue")
+          },
       ]
     },
     {
