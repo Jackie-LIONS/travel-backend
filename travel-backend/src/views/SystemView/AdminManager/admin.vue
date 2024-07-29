@@ -65,6 +65,7 @@ const data = reactive([{
 }]);
 
 </script>
+
 <style scoped>
 .arco-btn-secondary {
     background-color: #7eb712;

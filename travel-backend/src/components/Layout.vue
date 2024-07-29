@@ -4,7 +4,7 @@
             <Header></Header>
         </a-layout-header>
         <a-layout style="height: 70%">
-            <a-layout-sider width="auto">
+            <a-layout-sider class="sider">
                 <SiderNav />
             </a-layout-sider>
             <a-layout-content>
@@ -23,6 +23,9 @@ import Header from './Header.vue'
 <style scoped>
 .arco-layout-content {
     background-color: #1c2238;
+}
+.sider {
+    width: auto !important;
 }
 .content {
     height: 90%;

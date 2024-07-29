@@ -1,5 +1,5 @@
 <template>
-    <a-menu :style="{ width: '200px', height: '100%'}" theme="dark" :default-selected-keys="active" @collapse="onCollapse" show-collapse-button breakpoint="xl">
+    <a-menu :style="{ width: '200px', height: '100%'}" theme="dark" :default-selected-keys="active" show-collapse-button breakpoint="xl">
         <a-menu-item :key="'/'" @click="navigate('/')">
             <icon-apps />
             <span>首页</span>
