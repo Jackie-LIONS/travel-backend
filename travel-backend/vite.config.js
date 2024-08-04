@@ -34,4 +34,14 @@ export default defineConfig({
                 import.meta.url))
         }
     },
+    // 开发环境
+    server: {
+        proxy: {
+            '/api': {
+                target: 'http://localhost:80', // 后端接口的目标地址
+                changeOrigin: true,
+                rewrite: (path) => path.replace(/^\/api/, '')
+            }
+        }
+    }
 })

@@ -25,27 +25,27 @@ import {
 const columns = reactive([
     {
         title: '序号',
-        dataIndex: 'key',
+        dataIndex: 'aid',
         align: 'center'
     },
     {
         title: '用户名',
-        dataIndex: 'roleName',
+        dataIndex: 'username',
         align: 'center'
     },
     {
         title: '邮箱',
-        dataIndex: 'roleInfo',
+        dataIndex: 'email',
         align: 'center'
     },
     {
         title: '联系电话',
-        dataIndex: 'roleInfo',
+        dataIndex: 'phoneNum',
         align: 'center'
     },
     {
         title: '状态',
-        dataIndex: 'roleInfo',
+        dataIndex: 'status',
         align: 'center'
     },
     {
@@ -55,13 +55,11 @@ const columns = reactive([
     }
 ]);
 const data = reactive([{
-    key: '1',
-    roleName: 'lion',
-    roleInfo: '管理所有数据',
-}, {
-    key: '2',
-    roleName: 'sky',
-    roleInfo: '管理商品',
+    aid: '1',
+    username: 'lion',
+    email: '2373489842@qq.com',
+    phoneNum: '13926728410',
+    status: '启动',
 }]);
 
 </script>
