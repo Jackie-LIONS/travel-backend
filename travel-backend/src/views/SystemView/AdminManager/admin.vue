@@ -6,21 +6,33 @@
         </template>
         <template #default>增加</template>
     </a-button>
-    <a-table :columns="columns" :data="data">
+    <a-table :columns="columns" :data="data" @page-change="pageChange" @page-size-change="pageSizeChange" :pagination="{
+        pageSize: 6,
+        // current: searchParams.current,
+        showTotal: true,
+        total: total,
+        showPageSize: true,
+    }">
         <template #optional="{ record }">
-            <a-button size="small" type="primary" status="success">详情</a-button>
-            <a-button size="small" type="primary" @click="$modal.info({ title:'Name', content:record.name })">修改</a-button>
+            <a-button size="small" type="primary" status="success" @click="showInfo">详情</a-button>
+            <a-button size="small" type="primary"
+                @click="$modal.info({ title: 'Name', content: record.name })">修改</a-button>
             <a-button size="small" type="primary" status="danger">启用/禁用</a-button>
             <a-button size="small" type="primary" status="warning">分配权限</a-button>
         </template>
     </a-table>
+    <user-role-dialog :info="userRoleInfo"></user-role-dialog>
+    <user-edit-role-dialog :info="userEditRoleInfo"></user-edit-role-dialog>
 </template>
 
 <script setup>
-import { reactive } from 'vue';
+import userRoleDialog from './components/userRoleDialog.vue';
+import userEditRoleDialog from './components/userEditRoleDialog.vue';
+import { reactive, ref, onMounted } from 'vue';
 import {
     IconBookmark
 } from "@arco-design/web-vue/es/icon";
+import api from '@/api/index.js';
 
 const columns = reactive([
     {
@@ -62,6 +74,84 @@ const data = reactive([{
     status: '启动',
 }]);
 
+// 分页器数据
+let total = ref(1);
+const searchParams = reactive({
+    current: 1,
+    pageSize: 4,
+});
+const pageChange = async (page) => {
+    searchParams.current = page;
+};
+const getCategorys = async () => {
+    await api.getAdminAll({
+        page: 1,
+        size: 8
+    }).then(res => {
+        if (res.code === 200) {
+            total.value = res.data.total,
+                Object.assign(data, res.data.records);
+        }
+    })
+}
+const pageSizeChange = async (page) => {
+    searchParams.pageSize = page
+}
+
+// 查看详情---后续要接接口获取数据
+const userRoleInfo = reactive({
+    show: false,
+    data: [
+        {
+            "rid": null,
+            "roleName": "超级管理员",
+            "roleDesc": "管理所有数据",
+            "permissions": [
+                {
+                    "pid": null,
+                    "permissionName": "查询权限",
+                    "permissionDesc": null
+                },
+                {
+                    "pid": null,
+                    "permissionName": "查询角色",
+                    "permissionDesc": null
+                },
+                {
+                    "pid": null,
+                    "permissionName": "查询管理员",
+                    "permissionDesc": null
+                }
+            ]
+        }
+    ]
+})
+
+// 更改权限---后续要接接口获取数据
+const userEditRoleInfo = reactive({
+    show: true,
+    data: [
+        {
+            "rid": 1,
+            "roleName": "超级管理员",
+            "roleDesc": "管理所有数据",
+            "permissions": null
+        },
+        {
+            "rid": 2,
+            "roleName": "商品管理员",
+            "roleDesc": "管理商品",
+            "permissions": null
+        }
+    ],
+    select: [1]
+})
+const showInfo = function() {
+    userRoleInfo.show = true;
+}
+onMounted(() => {
+    getCategorys();
+})
 </script>
 
 <style scoped>
@@ -79,19 +169,23 @@ const data = reactive([{
     --color-neutral-3: rgb(36, 41, 62);
     margin: 20px auto;
 }
+
 .arco-btn {
     margin-right: 10px;
 }
+
 .title {
     margin-right: 10px;
     font-size: 26px;
     font-weight: 600;
     color: #3edcd4;
 }
+
 .title-info {
     font-size: 15px;
     color: gainsboro;
 }
+
 .arco-table-tr {
     background-color: red !important;
 }

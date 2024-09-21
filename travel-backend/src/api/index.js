@@ -3,7 +3,6 @@ import base from "./base.js";
 
 
 axios.defaults.headers.post['Content-Type'] = 'application/json';
-// axios.defaults.withCredentials=true;
 
 const api = {
     postLogin(params) {
@@ -28,6 +27,16 @@ const api = {
     },
     postDeleteCategory(params){
         return axios.post('/api'+base.deleteCategory+params)
+    },
+    getAdminAll(params){
+        return axios.get('/api' + base.getAdminPage,{
+            params
+        })
+    },
+    getFindRoleAll(params){
+        return axios.get('/api' + base.getRoleFindAll,{
+            params
+        })
     },
 }
 

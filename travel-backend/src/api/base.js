@@ -6,6 +6,8 @@ const base ={
     getProducts: "/backstage/product/all",
     getCategry: "/backstage/category/all",
     updateCategory: '/backstage/category/update',
-    deleteCategory: '/backstage/category/delete?cid='
+    deleteCategory: '/backstage/category/delete?cid=',
+    getAdminPage: '/backstage/admin/all',
+    getRoleFindAll: '/backstage/role/findAll',
 }
 export default base
