@@ -18,7 +18,7 @@
             <a-button size="small" type="primary"
                 @click="$modal.info({ title: 'Name', content: record.name })">修改</a-button>
             <a-button size="small" type="primary" status="danger">启用/禁用</a-button>
-            <a-button size="small" type="primary" status="warning">分配权限</a-button>
+            <a-button size="small" type="primary" status="warning" @click="showPermission">分配权限</a-button>
         </template>
     </a-table>
     <user-role-dialog :info="userRoleInfo"></user-role-dialog>
@@ -129,7 +129,7 @@ const userRoleInfo = reactive({
 
 // 更改权限---后续要接接口获取数据
 const userEditRoleInfo = reactive({
-    show: true,
+    show: false,
     data: [
         {
             "rid": 1,
@@ -144,10 +144,14 @@ const userEditRoleInfo = reactive({
             "permissions": null
         }
     ],
-    select: [1]
+    select: [2]
 })
 const showInfo = function() {
     userRoleInfo.show = true;
+}
+
+const showPermission = function() {
+    userEditRoleInfo.show = true;
 }
 onMounted(() => {
     getCategorys();

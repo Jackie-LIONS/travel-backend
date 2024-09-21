@@ -5,7 +5,7 @@
         </template>
         <el-table :data="info.data" row-key="id" size="small" :border="false">
             <el-table-column type="expand">
-                <template #default="scope" size="small" :style="{ padding: '0 30px' }">
+                <template #default="scope">
                     <el-table :data="scope.row.permissions" :border="false"
                         :style="{ marginLeft: '50px', width: '400px' }">
                         <el-table-column label="权限名" prop="permissionName" />
